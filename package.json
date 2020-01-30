@@ -1,0 +1,22 @@
+{
+  "name": "mapbox-wrapper",
+  "version": "1.0.0",
+  "description": "API to easily access Mapbox GL JS",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --watch"
+  },
+  "author": "Kanahiro Iguchi",
+  "license": "MIT",
+  "dependencies": {
+    "browserify": "^16.5.0",
+    "mapbox-gl": "^1.7.0",
+    "serve": "^11.3.0",
+    "webpack": "^4.41.5",
+    "yarn": "^1.21.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.10"
+  }
+}
