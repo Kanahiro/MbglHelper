@@ -1,4 +1,4 @@
-let gjLoader = require('./geojson.js');
+let gj = require('./geojson.js');
 
 class MbglWrapper {
     constructor(map) {
@@ -12,7 +12,7 @@ class MbglWrapper {
             id = this._defaultId()
         }
 
-        gjLoader.import(this.map, geojson, id, options)
+        gj.import(this.map, geojson, id, options)
     }
 
     _isValid(id) {

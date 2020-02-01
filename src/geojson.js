@@ -68,10 +68,23 @@ let _classifiedOptions = function(geometryType) {
                 type:"line",
                 paint:{
                     'line-color': _randomColor(),
-                    'line-opacity': 0.8
+                    'line-opacity': 0.8,
+                    'line-width':3
                 }
             }
             return lineOptions
+        case "Point":
+            let circleOptions = {
+                type:"circle",
+                paint:{
+                    'circle-color': _randomColor(),
+                    'circle-opacity': 0.8,
+                    'circle-radius':5,
+                    'circle-stroke-color':"#ffffff",
+                    'circle-stroke-width':1
+                }
+            }
+            return circleOptions
         default:
             break;
     }
