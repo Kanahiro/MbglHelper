@@ -6,6 +6,6 @@ module.exports = {
     // ビルド後、'./dist/my-bundle.js'というbundleファイルを生成する
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'index.js'
+        filename: 'mbglWrapper.js'
     }
 };

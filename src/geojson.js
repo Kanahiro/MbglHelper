@@ -19,7 +19,7 @@ module.exports = {
             'layout': {},
             'paint': cleanedOptions.paint
         });
-    }
+    },
 }
 
 let _isValid = function(map, id) {
