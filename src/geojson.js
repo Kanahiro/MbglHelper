@@ -1,13 +1,14 @@
+let utils = require('./utils.js')
+
 module.exports = {
     import: function(map, geojson, options={}) {
         let id = options.id
         if (id === undefined) {
-            id = _defaultId(map)
+            id = utils.defaultId(map, "geojson")
         }
-        console.log(options)
+        
         let geometryType = _classify(geojson)
         let cleanedOptions = _cleanOptions(options, geometryType)
-        console.log(cleanedOptions)
 
         map.addSource(id, {
             'type': 'geojson',
@@ -21,23 +22,6 @@ module.exports = {
             'paint': cleanedOptions.paint
         });
     },
-}
-
-let _isValid = function(map, id) {
-    let layer = map.getLayer(id)
-    if (layer === undefined) {
-        return true
-    }
-    return false
-}
-
-let _defaultId = function(map) {
-    let id = "geojson"
-    let counter = 0
-    while (!_isValid(map, id + String(counter))) {
-        counter = counter + 1
-    }
-    return id + String(counter)
 }
 
 let _classify = function(geojson) {

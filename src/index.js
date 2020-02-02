@@ -1,8 +1,13 @@
+let bm = require('./basemap.js');
 let gj = require('./geojson.js');
 
 class MbglWrapper {
     constructor(map) {
         this.map = map
+    }
+
+    addBasemap(tileUrl, options={}) {
+        bm.addBasemap(this.map, tileUrl, options)
     }
 
     import(geojson, options={}) {
