@@ -8,11 +8,11 @@ Read example/index.html firstly.
 MbglWrapper needs mapboxgl.Map to initialize.
 
 ```javascript
-var map = new mapboxgl.Map({
+let map = new mapboxgl.Map({
     container: 'mapPane',
     style: 'mapbox://styles/mapbox/streets-v11'
 });
-var mbglWrapper = new MbglWrapper(map)
+let mbglWrapper = new MbglWrapper(map)
 ```
 
 #### Basemap Setting
@@ -50,7 +50,7 @@ You can show GeoJson on your map easily as following.
 
 ```javascript
 //quoted from Mapbox GL JS example
-var geojson = {
+let geojson = {
     'type': 'Feature',
     'geometry': {
         'type': 'Polygon',
@@ -80,7 +80,7 @@ var geojson = {
         ]
     }
 }
-var options = {
+let options = {
     "id":"testLayer",
     "type":"fill",
     "paint":{
