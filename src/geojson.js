@@ -4,9 +4,10 @@ module.exports = {
         if (id === undefined) {
             id = _defaultId(map)
         }
-
+        console.log(options)
         let geometryType = _classify(geojson)
         let cleanedOptions = _cleanOptions(options, geometryType)
+        console.log(cleanedOptions)
 
         map.addSource(id, {
             'type': 'geojson',

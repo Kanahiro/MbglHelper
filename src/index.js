@@ -6,30 +6,7 @@ class MbglWrapper {
     }
 
     import(geojson, options={}) {
-        let id = options.id
-
-        if (id === undefined) {
-            id = this._defaultId()
-        }
-
-        gj.import(this.map, geojson, id, options)
-    }
-
-    _isValid(id) {
-        let layer = this.map.getLayer(id)
-        if (layer === undefined) {
-            return true
-        }
-        return false
-    }
-
-    _defaultId() {
-        let id = "geojson"
-        let counter = 0
-        while (!this._isValid(id + String(counter))) {
-            counter = counter + 1
-        }
-        return id + String(counter)
+        gj.import(this.map, geojson, options)
     }
 }
 
