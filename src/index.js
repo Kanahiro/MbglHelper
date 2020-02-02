@@ -6,6 +6,26 @@ class MbglWrapper {
         this.map = map
     }
 
+    clear() {
+        let cleared = {
+            'version':8,
+            'sources':{},
+            'layers':[]
+        }
+        this.map.setStyle(cleared)
+    }
+
+    add(datasource, options={}) {
+        if(typeof(datasource) === 'string') {
+            this.addBasemap(datasource, options)
+            return
+        }
+        if(typeof(datasource) === 'object') {
+            this.addGeojson(datasource, options)
+            return
+        }
+    }
+
     addBasemap(tileUrl, options={}) {
         bm.add(this.map, tileUrl, options)
     }

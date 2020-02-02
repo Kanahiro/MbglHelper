@@ -10,7 +10,7 @@
     <body>
         <div id='mapPane'></div>
         <script>
-            var map = new mapboxgl.Map({
+            let map = new mapboxgl.Map({
                 container: 'mapPane',
                 style: {
                     'version':8,
@@ -18,7 +18,7 @@
                     'layers':[]
                 }
             });
-            var mbglWrapper = new MbglWrapper(map)
+            let mbglWrapper = new MbglWrapper(map)
         </script>
     </body>
 </html>
