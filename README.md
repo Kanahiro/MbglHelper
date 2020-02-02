@@ -10,7 +10,12 @@ MbglWrapper needs mapboxgl.Map to initialize.
 ```javascript
 let map = new mapboxgl.Map({
     container: 'mapPane',
-    style: 'mapbox://styles/mapbox/streets-v11'
+    //empty style
+    style: {
+        'version':8,
+        'sources':{},
+        'layers':[]
+    }
 });
 let mbglWrapper = new MbglWrapper(map)
 ```
