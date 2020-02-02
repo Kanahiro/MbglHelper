@@ -1,10 +1,10 @@
-##Abstract
+## Abstract
 MbglWrapper is a wrapper library for Mapbox GL JS, designed to access Mapbox API more easily.
 
-##Usage
+## Usage
 Read example/index.html firstly.
 
-####Declaration
+#### Declaration
 MbglWrapper needs mapboxgl.Map to initialize.
 
 ```javascript
@@ -15,7 +15,7 @@ MbglWrapper needs mapboxgl.Map to initialize.
     var mbglWrapper = new MbglWrapper(map)
 ```
 
-####GeoJson Importing
+#### GeoJson Importing
 You can show GeoJson on your map easily as following.
 
 ```javascript
@@ -61,7 +61,7 @@ You can show GeoJson on your map easily as following.
     mbglWrapper.import(geojson, options)
 ```
 
-#####Importing Options
+##### Importing Options
 id, type, paint should be set in options but, even when options are not filled by that Three options, Default Options will be injected into options.
 Default Options are defined depending on Geometry Type of the GeoJson.
 This means you don't always have to set options.
