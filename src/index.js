@@ -7,11 +7,11 @@ class MbglWrapper {
     }
 
     addBasemap(tileUrl, options={}) {
-        bm.addBasemap(this.map, tileUrl, options)
+        bm.add(this.map, tileUrl, options)
     }
 
-    import(geojson, options={}) {
-        gj.import(this.map, geojson, options)
+    addGeojson(geojson, options={}) {
+        gj.add(this.map, geojson, options)
     }
 }
 

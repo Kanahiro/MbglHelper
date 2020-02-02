@@ -1,7 +1,7 @@
 let utils = require('./utils.js')
 
 module.exports = {
-    addBasemap: function(map, tileUrl, options={}) {
+    add: function(map, tileUrl, options={}) {
         let id = options.id
         if (id === undefined) {
             id = utils.defaultId(map, "raster")
@@ -33,17 +33,8 @@ let _cleanOptions = function(options) {
         'maxzoom':22,
     }
 
-    if (options.tileSize != undefined) {
-        defaultOptions.tileSize = options.tileSize
-    }
-    if (options.attribution != undefined) {
-        defaultOptions.paint = options.attribution
-    }
-    if (options.minzoom != undefined) {
-        defaultOptions.minzoom = options.minzoom
-    }
-    if (options.maxzoom != undefined) {
-        defaultOptions.maxzoom = options.maxzoom
+    for(key in options) {
+        defaultOptions[key] = options[key]
     }
     return defaultOptions
 }

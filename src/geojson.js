@@ -1,7 +1,7 @@
 let utils = require('./utils.js')
 
 module.exports = {
-    import: function(map, geojson, options={}) {
+    add: function(map, geojson, options={}) {
         let id = options.id
         if (id === undefined) {
             id = utils.defaultId(map, "geojson")
@@ -77,11 +77,8 @@ let _classifiedOptions = function(geometryType) {
 
 let _cleanOptions = function(options, geometryType) {
     let defaultOptions = _classifiedOptions(geometryType)
-    if (options.type != undefined) {
-        defaultOptions.type = options.type
-    }
-    if (options.paint != undefined) {
-        defaultOptions.paint = options.paint
+    for(key in options) {
+        defaultOptions[key] = options[key]
     }
     return defaultOptions
 }
