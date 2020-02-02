@@ -108,7 +108,7 @@ mbglWrapper.addGeojson(geojson)
 */
 ```
 
-#### Add Basemap and Geojson with one API
+#### Shorthand Access
 add() supports importing both Basemap and Geojson.
 
 ```javascript
