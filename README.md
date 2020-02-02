@@ -67,7 +67,7 @@ Default Options are defined depending on Geometry Type of the GeoJson.
 This means you don't always have to set options.
 
 ```javascript
-mbglWrapper.import(polygonGeojson) //works without options
+mbglWrapper.import(geojson) //works without options
 
 //will be set default options
 /*
