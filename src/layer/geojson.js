@@ -1,4 +1,4 @@
-let utils = require('./utils.js')
+let utils = require('../utils.js')
 
 module.exports = {
     add: function(map, geojson, options={}) {

@@ -1,4 +1,4 @@
-let utils = require('./utils.js')
+let utils = require('../utils.js')
 
 module.exports = {
     add: function(map, tileUrl, options={}) {
@@ -21,6 +21,7 @@ module.exports = {
             'source': id,
             'minzoom':cleanedOptions.minzoom,
             'maxzoom':cleanedOptions.maxzoom,
+            'paint':cleanedOptions.paint
         });
     }
 }
@@ -31,6 +32,7 @@ let _cleanOptions = function(options) {
         'attribution':'',
         'minzoom':0,
         'maxzoom':22,
+        'paint':{}
     }
 
     for(key in options) {

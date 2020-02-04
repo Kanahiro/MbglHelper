@@ -1,5 +1,5 @@
-let bm = require('./basemap.js');
-let gj = require('./geojson.js');
+let rsLayer = require('./layer/raster.js');
+let gjLayer = require('./layer/geojson.js');
 
 class MbglWrapper {
     constructor(map) {
@@ -7,31 +7,34 @@ class MbglWrapper {
     }
 
     clear() {
-        let cleared = {
+        let clearedStyle = {
             'version':8,
             'sources':{},
             'layers':[]
         }
-        this.map.setStyle(cleared)
+        this.map.setStyle(clearedStyle)
     }
 
     add(datasource, options={}) {
-        if(typeof(datasource) === 'string') {
-            this.addBasemap(datasource, options)
-            return
-        }
-        if(typeof(datasource) === 'object') {
-            this.addGeojson(datasource, options)
-            return
+        switch (typeof(datasource)) {
+            case 'string':
+                this.addBasemap(datasource, options)
+                return
+            case 'object':
+                this.addGeojson(datasource, options)
+                return
+            default:
+                console.log('import error:The type', typeof(datasource), 'is invalid.')
+                return
         }
     }
 
     addBasemap(tileUrl, options={}) {
-        bm.add(this.map, tileUrl, options)
+        rsLayer.add(this.map, tileUrl, options)
     }
 
     addGeojson(geojson, options={}) {
-        gj.add(this.map, geojson, options)
+        gjLayer.add(this.map, geojson, options)
     }
 }
 
