@@ -4,7 +4,7 @@ module.exports = {
     add: function(map, tileUrl, options={}) {
         let id = options.id
         if (id === undefined) {
-            id = utils.defaultId(map, "raster")
+            id = utils.defaultLayerId(map, "raster")
         }
 
         let cleanedOptions = _cleanOptions(options)

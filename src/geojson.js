@@ -4,7 +4,7 @@ module.exports = {
     add: function(map, geojson, options={}) {
         let id = options.id
         if (id === undefined) {
-            id = utils.defaultId(map, "geojson")
+            id = utils.defaultLayerId(map, "geojson")
         }
         
         let geometryType = _classify(geojson)

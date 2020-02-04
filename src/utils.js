@@ -1,5 +1,5 @@
 module.exports = {
-    defaultId: function(map, id) {
+    defaultLayerId: function(map, id) {
         let counter = 0
         while (!_isValid(map, id + String(counter))) {
             counter = counter + 1
