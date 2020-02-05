@@ -1,16 +1,10 @@
 module.exports = {
-    defaultLayerId: function(map, id) {
-        let counter = 0
-        while (!_isValid(map, id + String(counter))) {
-            counter = counter + 1
+    clear(map) {
+        let clearedStyle = {
+            'version':8,
+            'sources':{},
+            'layers':[]
         }
-        return id + String(counter)
+        map.setStyle(clearedStyle)
     }
-}
-let _isValid = function(map, id) {
-    let layer = map.getLayer(id)
-    if (layer === undefined) {
-        return true
-    }
-    return false
 }

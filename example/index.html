@@ -30,7 +30,8 @@
                     'maxzoom':14,
                     'paint':{'raster-opacity':0.5}
                 }
-                mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
+                mbglWrapper.addRaster('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
+                mbglWrapper.addVector('https://api.maptiler.com/maps/293781b9-2dde-4894-a6ef-0d6820d21e2d/style.json?key=qkkUVjxX8misUtW5bt6Z')
 
                 //geojson adding
                 let geojson = {
@@ -64,6 +65,8 @@
                     }
                 }
                 mbglWrapper.add(geojson) //shorthand-access
+
+                map.on('click', function(){console.log(map.getStyle())})
             })
         </script>
     </body>
