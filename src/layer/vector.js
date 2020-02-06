@@ -12,14 +12,14 @@ module.exports = {
         let sources = style.sources
         let layers = style.layers
 
-        map.setStyle(url)
+        map.setStyle(url, {'diff':false})
 
         layerUtils.waitForLoading(map, 100, 
             function(){
                 let vtStyle = map.getStyle()
                 let vtSources = vtStyle.sources
                 let vtLayers = vtStyle.layers
-                
+                console.log(vtStyle)
                 utils.clear(map)
 
                 let newSources = {}
@@ -34,9 +34,16 @@ module.exports = {
                 let newStyle = {
                     'version':8,
                     'sources':newSources,
-                    'layers':newLayers
+                    'layers':newLayers,
                 }
-                map.setStyle(newStyle)
+                if (vtStyle.glyphs != undefined) {
+                    newStyle.glyphs = vtStyle.glyphs
+                }
+                if (vtStyle.sprite != undefined) {
+                    newStyle.sprite = vtStyle.sprite
+                }
+
+                map.setStyle(newStyle, {'diff':false})
             }
         )
     }

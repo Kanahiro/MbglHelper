@@ -20,8 +20,15 @@ let map = new mapboxgl.Map({
 let mbglWrapper = new MbglWrapper(map)
 ```
 
-#### Basemap Setting
-Basemap can be set in initializing mapboxgl.Map but this wrapper also provide API for basemap importing.
+## Layer Importing
+
+#### Vector Tile
+
+```javascript
+mbglWrapper.addVector('mapbox://styles/mapbox/streets-v11')
+```
+
+#### Raster
 
 ```javascript
 let options = {
@@ -50,7 +57,8 @@ mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 */
 ```
 
-#### GeoJson Importing
+#### GeoJson
+
 You can show GeoJson on your map easily as following.
 
 ```javascript
@@ -111,15 +119,4 @@ mbglWrapper.addGeojson(geojson)
         }
     }
 */
-```
-
-#### Shorthand Access
-add() supports importing both Basemap and Geojson.
-
-```javascript
-mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
-mbglWrapper.addGeojson(geojson)
-//previous two lines are same meaning to following two lines
-mbglWrapper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
-mbglWrapper.add(geojson)
 ```

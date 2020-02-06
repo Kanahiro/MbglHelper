@@ -1,6 +1,7 @@
 let vcLayer = require('./layer/vector.js');
 let rsLayer = require('./layer/raster.js');
 let gjLayer = require('./layer/geojson.js');
+let utils = require('./utils.js')
 
 class MbglWrapper {
     constructor(map) {
@@ -8,27 +9,7 @@ class MbglWrapper {
     }
 
     clear() {
-        let clearedStyle = {
-            'version':8,
-            'sources':{},
-            'layers':[]
-        }
-        this.map.setStyle(clearedStyle)
-    }
-
-    add(datasource, options={}) {
-        switch (typeof(datasource)) {
-            case 'string':
-                this.addVector(datasource, options)
-                this.addRaster(datasource, options)
-                return
-            case 'object':
-                this.addGeojson(datasource, options)
-                return
-            default:
-                console.log('import error:The type', typeof(datasource), 'is invalid.')
-                return
-        }
+        utils.clear(this.map)
     }
 
     addVector(url, options={}) {

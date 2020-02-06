@@ -5,6 +5,6 @@ module.exports = {
             'sources':{},
             'layers':[]
         }
-        map.setStyle(clearedStyle)
+        map.setStyle(clearedStyle, {'diff':false})
     }
 }
