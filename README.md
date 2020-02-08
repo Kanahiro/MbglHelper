@@ -22,12 +22,6 @@ let mbglWrapper = new MbglWrapper(map)
 
 ## Layer Importing
 
-#### Vector Tile
-
-```javascript
-mbglWrapper.addVector('mapbox://styles/mapbox/streets-v11')
-```
-
 #### Raster
 
 ```javascript
@@ -119,4 +113,17 @@ mbglWrapper.addGeojson(geojson)
         }
     }
 */
+```
+
+#### Shorthand Access
+
+```javascript
+//following two lines mean same.
+mbglWrapper.addGeojson(geojson, options)
+mbglWrapper.add(geojson, options)
+
+//following two lines mean same.
+mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
+mbglWrapper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
+
 ```

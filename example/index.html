@@ -11,13 +11,9 @@
             let map = new mapboxgl.Map({
                 container: 'mapPane',
                 //empty style
-                style: {
-                    'version':8,
-                    'sources':{},
-                    'layers':[]
-                }
+                style: 'https://api.maptiler.com/maps/jp-mierune-streets/style.json?key=qkkUVjxX8misUtW5bt6Z'
             });
-
+            
             //wrapper init
             let mbglWrapper = new MbglWrapper(map)
 
@@ -30,8 +26,6 @@
                     'maxzoom':14,
                     'paint':{'raster-opacity':0.5}
                 }
-                
-                mbglWrapper.addVector('https://api.maptiler.com/maps/293781b9-2dde-4894-a6ef-0d6820d21e2d/style.json?key=qkkUVjxX8misUtW5bt6Z')
 
                 //geojson adding
                 let geojson = {
@@ -64,7 +58,7 @@
                         ]
                     }
                 }
-                mbglWrapper.addGeojson(geojson) //shorthand-access
+                mbglWrapper.add(geojson) //shorthand-access
 
                 map.on('click', function(){console.log(map.getStyle())})
             })

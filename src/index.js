@@ -1,4 +1,3 @@
-let vcLayer = require('./layer/vector.js');
 let rsLayer = require('./layer/raster.js');
 let gjLayer = require('./layer/geojson.js');
 let utils = require('./utils.js')
@@ -12,8 +11,17 @@ class MbglWrapper {
         utils.clear(this.map)
     }
 
-    addVector(url, options={}) {
-        vcLayer.add(this.map, url, options)
+    add(datasource, options={}) {
+        switch (typeof(datasource)) {
+            case 'string':
+                this.addRaster(datasource, options)
+                return
+            case 'object':
+                this.addGeojson(datasource, options)
+                return
+            default:
+                return
+        }
     }
 
     addRaster(tileUrl, options={}) {
