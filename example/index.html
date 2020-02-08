@@ -11,14 +11,18 @@
             let map = new mapboxgl.Map({
                 container: 'mapPane',
                 //empty style
-                style: 'https://api.maptiler.com/maps/jp-mierune-streets/style.json?key=qkkUVjxX8misUtW5bt6Z'
+                style: {
+                    'version':8,
+                    'sources':{},
+                    'layers':[]
+                }
             });
             
             //wrapper init
             let mbglWrapper = new MbglWrapper(map)
 
             map.on('load', function() {
-                //basemap adding
+                //raster adding
                 let options = {
                     'tileSize':256,
                     'attribution':'© OpenStreetMap contributors',
@@ -26,6 +30,8 @@
                     'maxzoom':14,
                     'paint':{'raster-opacity':0.5}
                 }
+
+                mbglWrapper.addRaster('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
 
                 //geojson adding
                 let geojson = {
