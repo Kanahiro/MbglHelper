@@ -118,12 +118,10 @@ mbglWrapper.addGeojson(geojson)
 #### Shorthand Access
 
 ```javascript
-//following two lines mean same.
 mbglWrapper.addGeojson(geojson, options)
-mbglWrapper.add(geojson, options)
-
-//following two lines mean same.
 mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
+//following two lines mean same to previous two lines.
+mbglWrapper.add(geojson, options)
 mbglWrapper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 
 ```
