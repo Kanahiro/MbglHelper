@@ -9,7 +9,7 @@ MbglWrapper needs mapboxgl.Map to initialize.
 Wrapper think the map in argument as BASEMAP, means background.
 
 ```javascript
-let basemap = new mapboxgl.Map({
+let map = new mapboxgl.Map({
     container: 'mapPane',
     //empty style
     style: {
@@ -18,7 +18,7 @@ let basemap = new mapboxgl.Map({
         'layers':[]
     }
 });
-let mbglWrapper = new MbglWrapper(basemap)
+let mbglWrapper = new MbglWrapper(map)
 ```
 
 ## APIs

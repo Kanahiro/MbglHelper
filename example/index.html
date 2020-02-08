@@ -8,16 +8,16 @@
     <body>
         <div id='mapPane'></div>
         <script>
-            let basemap = new mapboxgl.Map({
+            let map = new mapboxgl.Map({
                 container: 'mapPane',
                 //empty style
                 style: 'https://api.maptiler.com/maps/jp-mierune-streets/style.json?key=qkkUVjxX8misUtW5bt6Z'
             });
             
             //wrapper init
-            let mbglWrapper = new MbglWrapper(basemap)
+            let mbglWrapper = new MbglWrapper(map)
 
-            basemap.on('load', function() {
+            map.on('load', function() {
                 //basemap adding
                 let options = {
                     'tileSize':256,
@@ -60,7 +60,7 @@
                 }
                 mbglWrapper.add(geojson) //shorthand-access
 
-                basemap.on('click', function(){
+                map.on('click', function(){
                     mbglWrapper.clear()
                 })
             })
