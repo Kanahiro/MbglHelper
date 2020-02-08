@@ -1,31 +1,35 @@
-let utils = require('../utils.js')
 let layerUtils = require('./layerUtils.js')
 
 module.exports = {
-    add: function(map, tileUrl, options={}) {
+    add: function(wrapper, tileUrl, options={}) {
         let id = options.id
         if (id === undefined) {
-            id = layerUtils.defaultLayerId(map, 'raster')
+            id = layerUtils.defaultLayerId(wrapper.basemap, 'raster')
         }
 
         let cleanedOptions = layerUtils.cleanOptions(options, 'raster')
 
-        layerUtils.waitForLoading(map, 100, 
+        layerUtils.waitForLoading(wrapper.basemap, 100, 
             function() {
-                map.addSource(id, {
+                let source = {
                     'type': 'raster',
                     'tiles': [tileUrl],
                     'tileSize':cleanedOptions.tileSize,
                     'attribution':cleanedOptions.attribution
-                });
-                map.addLayer({
+                }
+                wrapper.basemap.addSource(id, source);
+                wrapper.overlaySources[id] = source
+
+                let layer = {
                     'id': id,
                     'type': 'raster',
                     'source': id,
                     'minzoom':cleanedOptions.minzoom,
                     'maxzoom':cleanedOptions.maxzoom,
                     'paint':cleanedOptions.paint
-                })
+                }
+                wrapper.basemap.addLayer(layer)
+                wrapper.overlayLayers.push(layer)
             }
         )
     }

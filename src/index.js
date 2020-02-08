@@ -1,14 +1,31 @@
-let rsLayer = require('./layer/raster.js');
-let gjLayer = require('./layer/geojson.js');
-let utils = require('./utils.js')
+let rs = require('./layer/raster.js');
+let gj = require('./layer/geojson.js');
 
 class MbglWrapper {
-    constructor(map) {
-        this.map = map
+    constructor(basemap) {
+        this.basemap = basemap
+        this.overlaySources = {}
+        this.overlayLayers = []
     }
 
     clear() {
-        utils.clear(this.map)
+        for (let key in this.overlayLayers) {
+            this.basemap.removeLayer(this.overlayLayers[key].id)
+        }
+        for (let key in this.overlaySources) {
+            this.basemap.removeSource(key)
+        }
+        this.overlaySources = {}
+        this.overlayLayers = []
+    }
+
+    clearAll() {
+        let clearedStyle = {
+            'version':8,
+            'sources':{},
+            'layers':[]
+        }
+        this.basemap.setStyle(clearedStyle, {'diff':false})
     }
 
     add(datasource, options={}) {
@@ -25,11 +42,11 @@ class MbglWrapper {
     }
 
     addRaster(tileUrl, options={}) {
-        rsLayer.add(this.map, tileUrl, options)
+        rs.add(this, tileUrl, options)
     }
 
     addGeojson(geojson, options={}) {
-        gjLayer.add(this.map, geojson, options)
+        gj.add(this, geojson, options)
     }
 }
 

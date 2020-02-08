@@ -6,9 +6,10 @@ Read example/index.html firstly.
 
 #### Declaration
 MbglWrapper needs mapboxgl.Map to initialize.
+Wrapper think the map in argument as BASEMAP, means background.
 
 ```javascript
-let map = new mapboxgl.Map({
+let basemap = new mapboxgl.Map({
     container: 'mapPane',
     //empty style
     style: {
@@ -17,10 +18,13 @@ let map = new mapboxgl.Map({
         'layers':[]
     }
 });
-let mbglWrapper = new MbglWrapper(map)
+let mbglWrapper = new MbglWrapper(basemap)
 ```
 
-## Layer Importing
+## APIs
+
+### Layer Importing
+Correspondingly to the basemap, this wrapper think user-importing-maps through this as OVERLAY.
 
 #### Raster
 
@@ -124,4 +128,10 @@ mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 mbglWrapper.add(geojson, options)
 mbglWrapper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 
+```
+
+### General
+```javascript
+//remove all overlay sources and layers
+mbglWrapper.clear()
 ```
