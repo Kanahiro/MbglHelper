@@ -1,6 +1,6 @@
 let utils = require('./utils.js')
-let rs = require('./layer/raster.js');
-let gj = require('./layer/geojson.js');
+let raster = require('./layer/raster.js');
+let geojson = require('./layer/geojson.js');
 
 class MbglWrapper {
     constructor(basemap) {
@@ -30,24 +30,29 @@ class MbglWrapper {
         if (id === undefined) {
             id = utils.generateId(this.basemap, 'overlay')
         }
-        switch (typeof(datasource)) {
-            case 'string':
-                this.addRaster(datasource, options)
-                return
-            case 'object':
-                this.addGeojson(datasource, options)
-                return
-            default:
-                return
+
+        let type = options.type
+        if (type === undefined) {
+            type = utils.classify(typeof(datasource))
         }
-    }
 
-    addRaster(tileUrl, options={}) {
-        rs.add(this, tileUrl, options)
-    }
-
-    addGeojson(geojson, options={}) {
-        gj.add(this, geojson, options)
+        let overlay
+        console.log(type)
+        switch (type) {
+            case 'raster':
+                overlay = raster.make(id, datasource, options)
+                break
+            case 'geojson':
+                overlay = geojson.make(id, datasource, options)
+                break
+            default:
+                //throw error
+                break
+        }
+        
+        this.overlay[id] = overlay
+        this.basemap.addSource(id, this.overlay[id].source)
+        this.basemap.addLayer(this.overlay[id].layer)
     }
 }
 

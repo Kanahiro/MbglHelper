@@ -6,6 +6,20 @@ module.exports = {
         }
         return id + String(counter)
     },
+    classify: function(dataType) {
+        let layerType = ''
+        switch (dataType) {
+            case 'string':
+                layerType = 'raster'
+                break;
+            case 'object':
+                layerType = 'geojson'
+                break;
+            default:
+                break;
+        }
+        return layerType
+    }
 }
 let _isValid = function(map, id) {
     let layer = map.getLayer(id)
