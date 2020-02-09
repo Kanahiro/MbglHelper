@@ -1,3 +1,4 @@
+let utils = require('./utils.js')
 let rs = require('./layer/raster.js');
 let gj = require('./layer/geojson.js');
 
@@ -25,6 +26,10 @@ class MbglWrapper {
     }
 
     add(datasource, options={}) {
+        let id = options.id
+        if (id === undefined) {
+            id = utils.generateId(this.basemap, 'overlay')
+        }
         switch (typeof(datasource)) {
             case 'string':
                 this.addRaster(datasource, options)
