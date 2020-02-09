@@ -1,12 +1,12 @@
 ## Abstract
-MbglWrapper is a wrapper library for Mapbox GL JS, designed to access Mapbox API more easily.
+Mbglhelper is a helper library for Mapbox GL JS, designed to access Mapbox API more easily.
 
 ## Usage
 Read example/index.html firstly.
 
 #### Declaration
-MbglWrapper needs mapboxgl.Map to initialize.
-Wrapper think the map in argument as BASEMAP, means background.
+Mbglhelper needs mapboxgl.Map to initialize.
+helper think the map in argument as BASEMAP, means background.
 
 ```javascript
 let map = new mapboxgl.Map({
@@ -18,13 +18,13 @@ let map = new mapboxgl.Map({
         'layers':[]
     }
 });
-let mbglWrapper = new MbglWrapper(map)
+let mbglHelper = new MbglHelper(map)
 ```
 
 ## APIs
 
 ### Layer Importing
-Correspondingly to the basemap, this wrapper think user-importing-maps through this as OVERLAY.
+Correspondingly to the basemap, this helper think user-importing-maps through this as OVERLAY.
 
 #### Raster
 
@@ -35,13 +35,13 @@ let options = {
     'minzoom':0,
     'maxzoom':22
 }
-mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
+mbglHelper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
 ```
 
 Or more simply you can write as follwoing.
 
 ```javascript
-mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
+mbglHelper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 //default options will be set
 /*
     {
@@ -99,13 +99,13 @@ let options = {
         "fill-opacity":0.8
         }
     }
-mbglWrapper.addGeojson(geojson, options)
+mbglHelper.addGeojson(geojson, options)
 ```
 
 Or more simply you can write as follwoing.
 
 ```javascript
-mbglWrapper.addGeojson(geojson)
+mbglHelper.addGeojson(geojson)
 //default options will be set
 /*
     {
@@ -122,16 +122,16 @@ mbglWrapper.addGeojson(geojson)
 #### Shorthand Access
 
 ```javascript
-mbglWrapper.addGeojson(geojson, options)
-mbglWrapper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
+mbglHelper.addGeojson(geojson, options)
+mbglHelper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 //following two lines mean same to previous two lines.
-mbglWrapper.add(geojson, options)
-mbglWrapper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
+mbglHelper.add(geojson, options)
+mbglHelper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 
 ```
 
 ### General
 ```javascript
 //remove all overlay sources and layers
-mbglWrapper.clear()
+mbglHelper.clear()
 ```
