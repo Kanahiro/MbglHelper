@@ -3,7 +3,7 @@
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
         <link href='index.css' rel='stylesheet' />
-        <script src='../dist/mbglWrapper.js'></script>
+        <script src='../dist/mbglHelper.js'></script>
     </head>
     <body>
         <div id='mapPane'></div>
@@ -19,7 +19,7 @@
             });
             
             //wrapper init
-            let mbglWrapper = new MbglWrapper(map)
+            let mbglHelper = new MbglHelper(map)
 
             map.on('load', function() {
                 //raster adding
@@ -31,7 +31,7 @@
                     'paint':{'raster-opacity':0.5}
                 }
 
-                mbglWrapper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
+                mbglHelper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
 
                 //geojson adding
                 let geojson = {
@@ -64,10 +64,10 @@
                         ]
                     }
                 }
-                mbglWrapper.add(geojson) //shorthand-access
+                mbglHelper.add(geojson) //shorthand-access
 
                 map.on('click', function(){
-                    mbglWrapper.removeOverlays()
+                    mbglHelper.removeOverlays()
                 })
             })
         </script>
