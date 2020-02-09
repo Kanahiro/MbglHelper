@@ -2,21 +2,31 @@ let utils = require('./utils.js')
 let raster = require('./layer/raster.js');
 let geojson = require('./layer/geojson.js');
 
-class MbglWrapper {
+class MbglHelper {
     constructor(basemap) {
         this.basemap = basemap
         this.overlay = {}
     }
 
-    clearOverlay() {
-        for (let key in this.overlay) {
+    remove(id) {
+        for (key in this.overlay) {
+            if (key === id) {
+                this.basemap.removeLayer(key)
+                this.basemap.removeSource(key)
+                return
+            }
+        }
+    }
+
+    removeOverlays() {
+        for (key in this.overlay) {
             this.basemap.removeLayer(key)
             this.basemap.removeSource(key)
         }
         this.overlay = {}
     }
 
-    clearAll() {
+    removeAll() {
         let clearedStyle = {
             'version':8,
             'sources':{},
@@ -36,8 +46,8 @@ class MbglWrapper {
             type = utils.classify(typeof(datasource))
         }
 
-        let overlay
-        console.log(type)
+        let overlay = {}
+        
         switch (type) {
             case 'raster':
                 overlay = raster.make(id, datasource, options)
@@ -56,9 +66,9 @@ class MbglWrapper {
     }
 }
 
-module.exports = MbglWrapper
+module.exports = MbglHelper
 
 //when load built scripts directly by browser
 if (typeof window !== 'undefined') {
-    window.MbglWrapper = MbglWrapper;
+    window.MbglHelper = MbglHelper;
 }
