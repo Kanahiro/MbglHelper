@@ -18,7 +18,6 @@ module.exports = {
                     'attribution':cleanedOptions.attribution
                 }
                 wrapper.basemap.addSource(id, source);
-                wrapper.overlaySources[id] = source
 
                 let layer = {
                     'id': id,
@@ -29,7 +28,10 @@ module.exports = {
                     'paint':cleanedOptions.paint
                 }
                 wrapper.basemap.addLayer(layer)
-                wrapper.overlayLayers.push(layer)
+                wrapper.overlay[id] = {
+                    'source':source,
+                    'layer':layer
+                }
             }
         )
     }

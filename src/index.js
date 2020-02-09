@@ -4,19 +4,15 @@ let gj = require('./layer/geojson.js');
 class MbglWrapper {
     constructor(basemap) {
         this.basemap = basemap
-        this.overlaySources = {}
-        this.overlayLayers = []
+        this.overlay = {}
     }
 
-    clear() {
-        for (let key in this.overlayLayers) {
-            this.basemap.removeLayer(this.overlayLayers[key].id)
-        }
-        for (let key in this.overlaySources) {
+    clearOverlay() {
+        for (let key in this.overlay) {
+            this.basemap.removeLayer(key)
             this.basemap.removeSource(key)
         }
-        this.overlaySources = {}
-        this.overlayLayers = []
+        this.overlay = {}
     }
 
     clearAll() {
