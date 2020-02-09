@@ -13,16 +13,6 @@ module.exports = {
         }
         return defaultOptions
     },
-    waitForLoading: function(map, time, method) {
-        let interval = setInterval(
-            function() {
-                if (map.isStyleLoaded()) {
-                    clearInterval(interval)
-                    method()
-                }
-            }, time
-        )
-    }
 }
 
 let _isValid = function(map, id) {

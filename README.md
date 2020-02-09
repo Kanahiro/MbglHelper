@@ -30,22 +30,23 @@ Correspondingly to the basemap, this helper think user-importing-maps through th
 
 ```javascript
 let options = {
+    'id':'osm',
     'tileSize':256,
     'attribution':'© OpenStreetMap contributors',
     'minzoom':0,
     'maxzoom':22
 }
-mbglHelper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
+mbglHelper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', 'raster', options)
 ```
 
 Or more simply you can write as follwoing.
 
 ```javascript
-mbglHelper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
+mbglHelper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 //default options will be set
 /*
     {
-        "id":"raster0",
+        "id":"overlay0",
         "type":"raster",
         'tileSize':256,
         'attribution':'',
@@ -99,17 +100,17 @@ let options = {
         "fill-opacity":0.8
         }
     }
-mbglHelper.addGeojson(geojson, options)
+mbglHelper.add(geojson, 'geojson', options)
 ```
 
 Or more simply you can write as follwoing.
 
 ```javascript
-mbglHelper.addGeojson(geojson)
+mbglHelper.add(geojson)
 //default options will be set
 /*
     {
-        "id":"geojson0",
+        "id":"overlay0",
         "type":"fill",
         "paint":{
             "fill-color":RANDOM_COLOR,
@@ -117,17 +118,6 @@ mbglHelper.addGeojson(geojson)
         }
     }
 */
-```
-
-#### Shorthand Access
-
-```javascript
-mbglHelper.addGeojson(geojson, options)
-mbglHelper.addBasemap('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
-//following two lines mean same to previous two lines.
-mbglHelper.add(geojson, options)
-mbglHelper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
-
 ```
 
 ### General

@@ -35,20 +35,19 @@ class MbglHelper {
         this.basemap.setStyle(clearedStyle, {'diff':false})
     }
 
-    add(datasource, options={}) {
+    add(datasource, datatype='', options={}) {
         let id = options.id
         if (id === undefined) {
             id = utils.generateId(this.basemap, 'overlay')
         }
 
-        let type = options.type
-        if (type === undefined) {
-            type = utils.classify(typeof(datasource))
+        let dt = datatype
+        if (dt === '') {
+            dt = utils.classify(typeof(datasource))
         }
 
         let overlay = {}
-        
-        switch (type) {
+        switch (dt) {
             case 'raster':
                 overlay = raster.make(id, datasource, options)
                 break
