@@ -1,21 +1,32 @@
-let rs = require('./layer/raster.js');
-let gj = require('./layer/geojson.js');
+let utils = require('./utils.js')
+let raster = require('./layer/raster.js');
+let geojson = require('./layer/geojson.js');
 
-class MbglWrapper {
+class MbglHelper {
     constructor(basemap) {
         this.basemap = basemap
         this.overlay = {}
     }
 
-    clearOverlay() {
-        for (let key in this.overlay) {
+    remove(id) {
+        for (key in this.overlay) {
+            if (key === id) {
+                this.basemap.removeLayer(key)
+                this.basemap.removeSource(key)
+                return
+            }
+        }
+    }
+
+    removeOverlays() {
+        for (key in this.overlay) {
             this.basemap.removeLayer(key)
             this.basemap.removeSource(key)
         }
         this.overlay = {}
     }
 
-    clearAll() {
+    removeAll() {
         let clearedStyle = {
             'version':8,
             'sources':{},
@@ -25,30 +36,39 @@ class MbglWrapper {
     }
 
     add(datasource, options={}) {
-        switch (typeof(datasource)) {
-            case 'string':
-                this.addRaster(datasource, options)
-                return
-            case 'object':
-                this.addGeojson(datasource, options)
-                return
-            default:
-                return
+        let id = options.id
+        if (id === undefined) {
+            id = utils.generateId(this.basemap, 'overlay')
         }
-    }
 
-    addRaster(tileUrl, options={}) {
-        rs.add(this, tileUrl, options)
-    }
+        let type = options.type
+        if (type === undefined) {
+            type = utils.classify(typeof(datasource))
+        }
 
-    addGeojson(geojson, options={}) {
-        gj.add(this, geojson, options)
+        let overlay = {}
+        
+        switch (type) {
+            case 'raster':
+                overlay = raster.make(id, datasource, options)
+                break
+            case 'geojson':
+                overlay = geojson.make(id, datasource, options)
+                break
+            default:
+                //throw error
+                break
+        }
+        
+        this.overlay[id] = overlay
+        this.basemap.addSource(id, this.overlay[id].source)
+        this.basemap.addLayer(this.overlay[id].layer)
     }
 }
 
-module.exports = MbglWrapper
+module.exports = MbglHelper
 
 //when load built scripts directly by browser
 if (typeof window !== 'undefined') {
-    window.MbglWrapper = MbglWrapper;
+    window.MbglHelper = MbglHelper;
 }

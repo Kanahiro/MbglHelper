@@ -1,38 +1,27 @@
 let layerUtils = require('./layerUtils.js')
 
 module.exports = {
-    add: function(wrapper, geojson, options={}) {
-        let id = options.id
-        if (id === undefined) {
-            id = layerUtils.defaultLayerId(wrapper.basemap, "geojson")
-        }
-        
+    make: function(id, geojson, options={}) {    
         let layerType = _classify(geojson)
         let cleanedOptions = layerUtils.cleanOptions(options, layerType)
 
-        layerUtils.waitForLoading(wrapper.basemap, 100, 
-            function() {
-                let source = {
-                    'type': 'geojson',
-                    'data': geojson
-                }
-                wrapper.basemap.addSource(id, source);
+        let source = {
+            'type': 'geojson',
+            'data': geojson
+        }
 
-                let layer = {
-                    'id': id,
-                    'type': cleanedOptions.type,
-                    'source': id,
-                    'layout': {},
-                    'paint': cleanedOptions.paint
-                }
-                wrapper.basemap.addLayer(layer);
+        let layer = {
+            'id': id,
+            'type': cleanedOptions.type,
+            'source': id,
+            'layout': {},
+            'paint': cleanedOptions.paint
+        }
 
-                wrapper.overlay[id] = {
-                    'source':source,
-                    'layer':layer
-                }
-            }
-        )
+        return {
+            'source':source,
+            'layer':layer
+        }
     },
 }
 

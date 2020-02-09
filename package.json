@@ -1,5 +1,5 @@
 {
-  "name": "mapbox-wrapper",
+  "name": "mapbox-helper",
   "version": "1.0.0",
   "description": "API to easily access Mapbox GL JS",
   "main": "index.js",
