@@ -2,6 +2,8 @@
     <head>
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
+        <script src='./ex-lib/mapbox-gl-opacity.js'></script>
+        <link href='./ex-lib/mapbox-gl-opacity.css' rel='stylesheet' />
         <link href='index.css' rel='stylesheet' />
         <script src='../dist/mbglHelper.js'></script>
     </head>
@@ -11,13 +13,20 @@
             let map = new mapboxgl.Map({
                 container: 'mapPane',
                 //empty style
-                style: 'https://api.maptiler.com/maps/jp-mierune-streets/style.json?key=qkkUVjxX8misUtW5bt6Z'
+                style: {
+                    'version':8,
+                    'sources':{},
+                    'layers':[]
+                }
             });
-            
-            //wrapper init
-            let mbglHelper = new MbglHelper(map)
+
+            //helper declare
+            let mbglHelper
 
             map.on('load', function() {
+                //helper init
+                mbglHelper = new MbglHelper(map) 
+
                 //raster adding
                 let options = {
                     'id':'osm',
@@ -27,8 +36,7 @@
                     'maxzoom':14,
                     'paint':{'raster-opacity':0.5}
                 }
-
-                mbglHelper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', 'raster', options)
+                mbglHelper.addOverlay('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
 
                 //geojson adding
                 let geojson = {
@@ -61,11 +69,10 @@
                         ]
                     }
                 }
-                mbglHelper.add(geojson, 'geojson')
-
-                map.on('click', function(){
-                    mbglHelper.removeOverlays()
-                })
+                mbglHelper.addOverlay(geojson)
+            })
+            map.on('click', function(){
+                mbglHelper.removeOverlay('overlay0')
             })
         </script>
     </body>

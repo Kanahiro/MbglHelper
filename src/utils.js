@@ -20,7 +20,7 @@ module.exports = {
         }
         return layerType
     },
-    waitForLoading: function(map, time, method) {
+    waitForStyleLoaded: function(map, time, method) {
         let interval = setInterval(
             function() {
                 if (map.isStyleLoaded()) {

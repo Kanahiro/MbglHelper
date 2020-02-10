@@ -3,55 +3,45 @@ let raster = require('./layer/raster.js');
 let geojson = require('./layer/geojson.js');
 
 class MbglHelper {
-    constructor(basemap) {
-        this.basemap = basemap
-        this.overlay = {}
+    constructor(map) {
+        this.map = map
+        this.overlays = {}
     }
 
-    remove(id) {
-        for (key in this.overlay) {
+    removeOverlay(id) {
+        if (this.overlays[id] === undefined) {
+            return
+        }
+        for (key in this.overlays) {
             if (key === id) {
-                this.basemap.removeLayer(key)
-                this.basemap.removeSource(key)
+                this.map.removeLayer(key)
+                this.map.removeSource(key)
+                delete this.overlays[key]
                 return
             }
         }
     }
 
     removeOverlays() {
-        for (key in this.overlay) {
-            this.basemap.removeLayer(key)
-            this.basemap.removeSource(key)
+        for (key in this.overlays) {
+            this.map.removeLayer(key)
+            this.map.removeSource(key)
         }
-        this.overlay = {}
+        this.overlays = {}
     }
 
-    removeAll() {
-        let clearedStyle = {
-            'version':8,
-            'sources':{},
-            'layers':[]
-        }
-        this.basemap.setStyle(clearedStyle, {'diff':false})
-    }
-
-    add(datasource, datatype='', options={}) {
+    addOverlay(datasource, options={}) {
         let id = options.id
         if (id === undefined) {
-            id = utils.generateId(this.basemap, 'overlay')
-        }
-
-        let dt = datatype
-        if (dt === '') {
-            dt = utils.classify(typeof(datasource))
+            id = utils.generateId(this.map, 'overlay')
         }
 
         let overlay = {}
-        switch (dt) {
-            case 'raster':
+        switch (typeof(datasource)) {
+            case 'string':
                 overlay = raster.make(id, datasource, options)
                 break
-            case 'geojson':
+            case 'object':
                 overlay = geojson.make(id, datasource, options)
                 break
             default:
@@ -59,9 +49,9 @@ class MbglHelper {
                 break
         }
         
-        this.overlay[id] = overlay
-        this.basemap.addSource(id, this.overlay[id].source)
-        this.basemap.addLayer(this.overlay[id].layer)
+        this.overlays[id] = overlay
+        this.map.addSource(id, this.overlays[id].source)
+        this.map.addLayer(this.overlays[id].layer)
     }
 }
 

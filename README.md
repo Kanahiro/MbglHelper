@@ -1,5 +1,5 @@
 ## Abstract
-Mbglhelper is a helper library for Mapbox GL JS, designed to access Mapbox API more easily.
+Mbglhelper is a wrapper library for Mapbox GL JS, designed to access Mapbox API more easily.
 
 ## Usage
 Read example/index.html firstly.
@@ -7,6 +7,7 @@ Read example/index.html firstly.
 #### Declaration
 Mbglhelper needs mapboxgl.Map to initialize.
 helper think the map in argument as BASEMAP, means background.
+helper won't edit BASEMAP but only OVERLAYs, which is layers user added through this lib.
 
 ```javascript
 let map = new mapboxgl.Map({
@@ -23,8 +24,8 @@ let mbglHelper = new MbglHelper(map)
 
 ## APIs
 
-### Layer Importing
-Correspondingly to the basemap, this helper think user-importing-maps through this as OVERLAY.
+### Overlay Adding
+Correspondingly to the basemap, this helper think layers user added through this as OVERLAYs.
 
 #### Raster
 
@@ -36,13 +37,13 @@ let options = {
     'minzoom':0,
     'maxzoom':22
 }
-mbglHelper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', 'raster', options)
+mbglHelper.addOverlay('https://tile.openstreetmap.jp/{z}/{x}/{y}.png', options)
 ```
 
 Or more simply you can write as follwoing.
 
 ```javascript
-mbglHelper.add('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
+mbglHelper.addOverlay('https://tile.openstreetmap.jp/{z}/{x}/{y}.png')
 //default options will be set
 /*
     {
@@ -100,13 +101,13 @@ let options = {
         "fill-opacity":0.8
         }
     }
-mbglHelper.add(geojson, 'geojson', options)
+mbglHelper.addOverlay(geojson, options)
 ```
 
 Or more simply you can write as follwoing.
 
 ```javascript
-mbglHelper.add(geojson)
+mbglHelper.addOverlay(geojson)
 //default options will be set
 /*
     {
@@ -120,8 +121,16 @@ mbglHelper.add(geojson)
 */
 ```
 
-### General
+## Remove Overlay
+
+Remove overlay by Id
 ```javascript
-//remove all overlay sources and layers
-mbglHelper.clear()
+let id = 'overlay0'
+mbglHelper.removeOverlay(id)
+```
+
+And you can remove All Overlays at once.
+
+```javascript
+mbglHelper.removeOverlays()
 ```
